@@ -1,0 +1,67 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "productName": "Citrus CocaCola",
+            "quantity": 100,
+            "price": 1.20,
+            "category": "softdrink",
+            "brand": "CocaCola",
+            "unit": "1.5 liter"
+        },
+        {
+            "id": 2,
+            "productName": "Oreo",
+            "quantity": 23,
+            "price": 1.50,
+            "category": "cookies",
+            "brand": "Oreo",
+            "unit": "170 g"
+        },
+        {
+            "id": 3,
+            "productName": "Hershey Kisses Almond",
+            "quantity": 33,
+            "price": 17.80,
+            "category": "candy",
+            "brand": "Haribo",
+            "unit": "2.7 kg"
+        },
+        {
+            "id": 4,
+            "productName": "M&M peanut candy",
+            "quantity": 85,
+            "price": 8.90,
+            "category": "candy",
+            "brand": "M&M",
+            "unit": "1 kg"
+        },
+        {
+            "id": 5,
+            "productName": "Mountain Dew",
+            "quantity": 100,
+            "price": 3.00,
+            "category": "softdrink",
+            "brand": "PepsiCo",
+            "unit": "1.5 liter"
+        },
+        {
+            "id": 6,
+            "productName": "Amino Acids + B5",
+            "quantity": 27,
+            "price": 6.90,
+            "category": "serum",
+            "brand": "The Ordinary",
+            "unit": "30 ml"
+        },
+        {
+            "id": 7,
+            "productName": "Oceanix Turtle Eggs Choco Chips Biscuits",
+            "quantity": 90,
+            "price": 1.00,
+            "category": "cookies",
+            "brand": "Cuetara",
+            "unit": "140 g"
+        }
+    ]
+}
