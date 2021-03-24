@@ -1,4 +1,3 @@
-import productData from "../products.json";
 import { Box, Grid, Image, Text, Stack, Button } from "@chakra-ui/react";
 import allImages from "../images/images";
 
@@ -8,23 +7,22 @@ function ProductList(props) {
   }
   return (
     <Grid templateColumns="repeat(3, 1fr)" gap={4}>
-      {productData.products.map((item) => (
+      {props.allProducts.map((item) => (
         <Box
           key={item.id}
           bg="tomato"
-          width="400px"
-          p={6}
+          w="400px"
           color="white"
-          margin="30px auto"
-          padding="30px"
+          m="30px auto"
+          p="30px"
           borderRadius="lg"
-          shadow="2xl"
+          boxShadow="2xl"
         >
           <Image
             src={allImages[Math.floor(Math.random() * allImages.length)]}
             alt={item.productName}
-            width="100%"
-            height="200px"
+            w="100%"
+            h="200px"
             borderRadius="lg"
           />
           <Text fontSize="20px">
@@ -36,7 +34,7 @@ function ProductList(props) {
           <p>Unit: {item.unit}</p>
           <p>Brand: {item.brand}</p>
           <p>Category: {item.category}</p>
-          <Stack direction="row" spacing={4} align="center" marginTop={4}>
+          <Stack direction="row" spacing={4} align="center" mt={4}>
             <Button
               colorScheme="teal"
               variant="solid"
