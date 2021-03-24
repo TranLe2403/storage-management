@@ -1,74 +1,57 @@
+import { Stack, Button, Heading } from "@chakra-ui/react";
+import { useState } from "react";
+import ProductList from "./components/ProductList";
+import AddNewProductForm from "./components/AddNewProductForm";
 import productData from "./products.json";
-import {
-  Box,
-  Grid,
-  Image,
-  Text,
-  Stack,
-  Button,
-  Heading,
-} from "@chakra-ui/react";
-import allImages from "./images/images";
+import Notification from "./components/Notification";
 
 function App() {
+  const [allProducts, setAllProducts] = useState(productData.products);
+  const [currentPage, setCurrentPage] = useState("product-list");
+  const [message, setMessage] = useState("");
+
+  const displayMessage = (message) => {
+    setMessage(message);
+    setTimeout(() => {
+      setMessage(null);
+    }, 5000);
+  };
   return (
     <div className="App">
-      <Heading color="teal" textAlign="center" marginTop={4}>
+      <Heading color="teal" textAlign="center" mt={4}>
         MY STORAGE
       </Heading>
 
-      <Grid templateColumns="repeat(3, 1fr)" gap={4}>
-        {productData.products.map((item) => (
-          <Box
-            key={item.id}
-            bg="tomato"
-            width="400px"
-            p={6}
-            color="white"
-            margin="30px auto"
-            padding="30px"
-            borderRadius="lg"
-            shadow="2xl"
-          >
-            <Image
-              src={allImages[Math.floor(Math.random() * allImages.length)]}
-              alt={item.productName}
-              width="100%"
-              height="200px"
-              borderRadius="lg"
-            />
-            <Text fontSize="20px">
-              <strong>{item.productName}</strong>
-            </Text>
-            <p>
-              Price: €{item.price} | Quantity: {item.quantity}
-            </p>
-            <p>Unit: {item.unit}</p>
-            <p>Brand: {item.brand}</p>
-            <p>Category: {item.category}</p>
-            <Stack direction="row" spacing={4} align="center" marginTop={4}>
-              <Button
-                colorScheme="teal"
-                variant="solid"
-                width="50%"
-                height="30px"
-                borderRadius="full"
-              >
-                Edit
-              </Button>
-              <Button
-                colorScheme="teal"
-                variant="solid"
-                width="50%"
-                height="30px"
-                borderRadius="full"
-              >
-                Delete
-              </Button>
-            </Stack>
-          </Box>
-        ))}
-      </Grid>
+      <Notification message={message} />
+
+      <Stack direction="row" spacing={4} align="center" mt={4} ml={10}>
+        <Button
+          colorScheme="teal"
+          variant="outline"
+          onClick={() => setCurrentPage("product-list")}
+        >
+          Product List
+        </Button>
+        <Button
+          colorScheme="teal"
+          variant="outline"
+          onClick={() => setCurrentPage("add-product-form")}
+        >
+          Add Product Form
+        </Button>
+      </Stack>
+
+      <ProductList
+        show={currentPage === "product-list"}
+        allProducts={allProducts}
+      />
+
+      <AddNewProductForm
+        show={currentPage === "add-product-form"}
+        setAllProducts={setAllProducts}
+        allProducts={allProducts}
+        displayMessage={displayMessage}
+      />
     </div>
   );
 }
