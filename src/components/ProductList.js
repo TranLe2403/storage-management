@@ -25,7 +25,13 @@ function ProductList(props) {
             h="200px"
             borderRadius="lg"
           />
-          <Text fontSize="20px">
+          <Text
+            fontSize="2xl"
+            h="70px"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
             <strong>{item.productName}</strong>
           </Text>
           <p>
