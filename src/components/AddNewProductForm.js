@@ -7,7 +7,9 @@ import {
   Spacer,
   FormControl,
   FormLabel,
+  FormHelperText,
 } from "@chakra-ui/react";
+import axios from "axios";
 
 function NewProductForm(props) {
   const [newProduct, setNewProduct] = useState({
@@ -27,7 +29,7 @@ function NewProductForm(props) {
     (item) => item.productName === newProduct.productName
   );
 
-  const addProduct = (event) => {
+  const addProduct = async (event) => {
     event.preventDefault();
 
     if (hasProductNameExisted) {
@@ -46,19 +48,27 @@ function NewProductForm(props) {
       unit: newProduct.unit,
     };
 
-    props.setAllProducts(props.allProducts.concat(productAdded));
-    props.displayMessage(
-      `Product ${newProduct.productName} is added successfully`
-    );
+    try {
+      await axios.post("http://localhost:3001/product", productAdded);
 
-    setNewProduct({
-      productName: "",
-      price: "",
-      brand: "",
-      unit: "",
-      category: "",
-      quantity: "",
-    });
+      props.setAllProducts(props.allProducts.concat(productAdded));
+
+      props.displayMessage(
+        `Product ${newProduct.productName} is added successfully`
+      );
+
+      setNewProduct({
+        productName: "",
+        price: "",
+        brand: "",
+        unit: "",
+        category: "",
+        quantity: "",
+      });
+    } catch (error) {
+      props.displayMessage(error.message);
+      console.error(error);
+    }
   };
 
   return (
@@ -69,16 +79,23 @@ function NewProductForm(props) {
             <FormLabel w="30%" textAlign="center">
               Product Name
             </FormLabel>
-            <Input
-              type="string"
-              isInvalid={hasProductNameExisted ? true : false}
-              errorBorderColor="crimson"
-              value={newProduct.productName}
-              onChange={({ target }) =>
-                setNewProduct({ ...newProduct, productName: target.value })
-              }
-              placeholder="Product Name"
-            />
+            <Wrap m={1} width="100%">
+              <Input
+                type="string"
+                isInvalid={hasProductNameExisted ? true : false}
+                errorBorderColor="crimson"
+                value={newProduct.productName}
+                onChange={({ target }) =>
+                  setNewProduct({ ...newProduct, productName: target.value })
+                }
+                placeholder="Product Name"
+              />
+              {hasProductNameExisted && (
+                <FormHelperText color="red" fontSize="xs">
+                  Product name is already existed!
+                </FormHelperText>
+              )}
+            </Wrap>
           </FormControl>
 
           <FormControl w="80%" d="flex" alignItems="center" isRequired>
