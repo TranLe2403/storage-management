@@ -49,7 +49,7 @@ function NewProductForm(props) {
     };
 
     try {
-      await axios.post("http://localhost:3001/product", productAdded);
+      await axios.post("http://localhost:3001/products", productAdded);
 
       props.setAllProducts(props.allProducts.concat(productAdded));
 
