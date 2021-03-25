@@ -1,14 +1,27 @@
 import { Stack, Button, Heading } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductList from "./components/ProductList";
 import AddNewProductForm from "./components/AddNewProductForm";
-import productData from "./products.json";
 import Notification from "./components/Notification";
+import axios from "axios";
 
 function App() {
-  const [allProducts, setAllProducts] = useState(productData.products);
+  const [allProducts, setAllProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState("product-list");
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/products");
+        setAllProducts(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getProducts();
+  }, []);
 
   const displayMessage = (message) => {
     setMessage(message);
