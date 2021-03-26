@@ -1,24 +1,55 @@
+import { useState, useEffect } from "react";
 import { Box, Grid, Image, Text, Stack, Button } from "@chakra-ui/react";
 import allImages from "../images/images";
 import ModalProductDeletion from "./ModalProductDeletion";
 
 function ProductList(props) {
+  const getNumberOfItems = () => {
+    const screenSize = window.innerWidth;
+
+    if (screenSize > 1280) {
+      return 3;
+    } else if (screenSize < 1280 && screenSize >= 768) {
+      return 2;
+    }
+    return 1;
+  };
+
+  const [limitLength, setLimitLength] = useState(getNumberOfItems());
+
+  useEffect(() => {
+    window.addEventListener("resize", reportWindowSize);
+    return () => {
+      window.removeEventListener("resize", reportWindowSize);
+    };
+  });
+
+  function reportWindowSize() {
+    setLimitLength(getNumberOfItems());
+  }
+
   if (!props.show) {
     return null;
   }
 
   return (
-    <Grid templateColumns="repeat(3, 1fr)" gap={4}>
+    <Grid
+      templateColumns={`repeat(${limitLength}, 1fr)`}
+      gap={10}
+      ml={10}
+      mr={10}
+    >
       {props.allProducts.map((item) => (
         <Box
           key={item.id}
           bg="tomato"
-          w="400px"
+          w="100%"
           color="white"
           m="30px auto"
           p="30px"
           borderRadius="lg"
           boxShadow="2xl"
+          maxW="400px"
         >
           <Image
             src={allImages[Math.floor(Math.random() * allImages.length)]}
@@ -33,6 +64,8 @@ function ProductList(props) {
             display="flex"
             alignItems="center"
             justifyContent="center"
+            textAlign="center"
+            lineHeight={8}
           >
             <strong>{item.productName}</strong>
           </Text>
@@ -58,7 +91,6 @@ function ProductList(props) {
               allProducts={props.allProducts}
               displayMessage={props.displayMessage}
               setAllProducts={props.setAllProducts}
-
             />
           </Stack>
         </Box>
