@@ -1,10 +1,12 @@
 import { Box, Grid, Image, Text, Stack, Button } from "@chakra-ui/react";
 import allImages from "../images/images";
+import ModalProductDeletion from "./ModalProductDeletion";
 
 function ProductList(props) {
   if (!props.show) {
     return null;
   }
+
   return (
     <Grid templateColumns="repeat(3, 1fr)" gap={4}>
       {props.allProducts.map((item) => (
@@ -50,15 +52,14 @@ function ProductList(props) {
             >
               Edit
             </Button>
-            <Button
-              colorScheme="teal"
-              variant="solid"
-              width="50%"
-              height="30px"
-              borderRadius="full"
-            >
-              Delete
-            </Button>
+
+            <ModalProductDeletion
+              productId={item.id}
+              allProducts={props.allProducts}
+              displayMessage={props.displayMessage}
+              setAllProducts={props.setAllProducts}
+
+            />
           </Stack>
         </Box>
       ))}
