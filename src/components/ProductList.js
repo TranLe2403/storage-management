@@ -64,6 +64,8 @@ function ProductList(props) {
             display="flex"
             alignItems="center"
             justifyContent="center"
+            textAlign="center"
+            lineHeight={8}
           >
             <strong>{item.productName}</strong>
           </Text>
