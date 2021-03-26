@@ -1,9 +1,12 @@
 import { Stack, Button, Heading } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import axios from "axios";
+
 import ProductList from "./components/ProductList";
 import AddNewProductForm from "./components/AddNewProductForm";
 import Notification from "./components/Notification";
-import axios from "axios";
+
+let previousTimeout;
 
 function App() {
   const [allProducts, setAllProducts] = useState([]);
@@ -24,11 +27,13 @@ function App() {
   }, []);
 
   const displayMessage = (message) => {
-    setMessage(message);
-    setTimeout(() => {
+    clearTimeout(previousTimeout);
+    previousTimeout = setTimeout(() => {
       setMessage(null);
     }, 5000);
+    setMessage(message);
   };
+
   return (
     <div className="App">
       <Heading color="teal" textAlign="center" mt={4}>
@@ -57,6 +62,8 @@ function App() {
       <ProductList
         show={currentPage === "product-list"}
         allProducts={allProducts}
+        displayMessage={displayMessage}
+        setAllProducts={setAllProducts}
       />
 
       <AddNewProductForm
