@@ -128,7 +128,6 @@ const App = () => {
         show={currentPage === "product-list"}
         allProducts={allProducts}
         displayMessage={displayMessage}
-        setAllProducts={setAllProducts}
       />
 
       <AddNewProductForm

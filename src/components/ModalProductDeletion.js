@@ -25,7 +25,6 @@ const ModalProductDeletion = (props) => {
       (item) => item.id === id
     );
 
-    console.log(deletedProductIndex);
     const deletedProduct = props.allProducts[deletedProductIndex];
     props.allProducts.splice(deletedProductIndex, 1);
     onClose();

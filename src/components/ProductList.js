@@ -90,7 +90,6 @@ function ProductList(props) {
               productId={item.id}
               allProducts={props.allProducts}
               displayMessage={props.displayMessage}
-              setAllProducts={props.setAllProducts}
             />
           </Stack>
         </Box>
