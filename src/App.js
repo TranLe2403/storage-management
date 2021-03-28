@@ -121,7 +121,6 @@ const App = () => {
             <option
               key={item.value}
               value={item.value}
-              // data-testid="test-select-sort-option"
             >
               {item.label}
             </option>

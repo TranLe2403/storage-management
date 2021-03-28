@@ -163,7 +163,7 @@ function NewProductForm(props) {
             />
           </FormControl>
 
-          <FormControl w="80%" d="flex" alignItems="center">
+          <FormControl w="80%" d="flex" alignItems="center" isRequired>
             <FormLabel w="30%" textAlign="center">
               Unit
             </FormLabel>
@@ -175,7 +175,6 @@ function NewProductForm(props) {
               }
               placeholder="Unit"
               data-testid="test-unit-input"
-              isRequired
             />
           </FormControl>
 
