@@ -43,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "@emotion/jest": "^11.2.1",
     "json-server": "^0.16.3"
   }
 }

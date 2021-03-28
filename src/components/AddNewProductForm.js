@@ -79,7 +79,11 @@ function NewProductForm(props) {
             <FormLabel w="30%" textAlign="center">
               Product Name
             </FormLabel>
-            <Wrap m={1} width="100%">
+            <Wrap
+              m={1}
+              width="100%"
+              data-testid="test-product-name-input-wrapper"
+            >
               <Input
                 type="string"
                 isInvalid={hasProductNameExisted ? true : false}
@@ -89,6 +93,7 @@ function NewProductForm(props) {
                   setNewProduct({ ...newProduct, productName: target.value })
                 }
                 placeholder="Product Name"
+                data-testid="test-product-name-input"
               />
               {hasProductNameExisted && (
                 <FormHelperText color="red" fontSize="xs">
@@ -109,6 +114,7 @@ function NewProductForm(props) {
                 setNewProduct({ ...newProduct, price: target.value })
               }
               placeholder="Price"
+              data-testid="test-price-input"
             />
           </FormControl>
 
@@ -123,6 +129,7 @@ function NewProductForm(props) {
                 setNewProduct({ ...newProduct, quantity: target.value })
               }
               placeholder="Quantity"
+              data-testid="test-quantity-input"
             />
           </FormControl>
 
@@ -137,6 +144,7 @@ function NewProductForm(props) {
                 setNewProduct({ ...newProduct, brand: target.value })
               }
               placeholder="Brand"
+              data-testid="test-brand-input"
             />
           </FormControl>
 
@@ -151,6 +159,7 @@ function NewProductForm(props) {
                 setNewProduct({ ...newProduct, category: target.value })
               }
               placeholder="Category"
+              data-testid="test-category-input"
             />
           </FormControl>
 
@@ -165,6 +174,7 @@ function NewProductForm(props) {
                 setNewProduct({ ...newProduct, unit: target.value })
               }
               placeholder="Unit"
+              data-testid="test-unit-input"
             />
           </FormControl>
 
@@ -176,6 +186,7 @@ function NewProductForm(props) {
               variant="solid"
               borderRadius="full"
               mt={10}
+              data-testid="test-add-button"
             >
               Add Product
             </Button>
