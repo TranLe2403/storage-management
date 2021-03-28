@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Box, Grid, Image, Text, Stack, Button } from "@chakra-ui/react";
-import allImages from "../images/images";
 import ModalProductDeletion from "./ModalProductDeletion";
+import defaultImg from "../images/default.png";
 
 function ProductList(props) {
   const getNumberOfItems = () => {
@@ -40,7 +40,7 @@ function ProductList(props) {
       mr={10}
       data-testid="test-all-products"
     >
-      {props.allProducts.map((item) => (
+      {props.allProducts.map((item, index) => (
         <Box
           key={item.id}
           bg="tomato"
@@ -53,7 +53,7 @@ function ProductList(props) {
           maxW="400px"
         >
           <Image
-            src={allImages[Math.floor(Math.random() * allImages.length)]}
+            src={defaultImg}
             alt={item.productName}
             w="100%"
             h="200px"
