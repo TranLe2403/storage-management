@@ -38,6 +38,7 @@ function ProductList(props) {
       gap={10}
       ml={10}
       mr={10}
+      data-testid="test-all-products"
     >
       {props.allProducts.map((item) => (
         <Box
