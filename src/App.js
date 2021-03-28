@@ -115,9 +115,14 @@ const App = () => {
           variant="outline"
           value={selectedOption}
           onChange={selectOptionHandler}
+          data-testid="test-select-sort-option"
         >
           {selectValues.map((item) => (
-            <option key={item.value} value={item.value}>
+            <option
+              key={item.value}
+              value={item.value}
+              // data-testid="test-select-sort-option"
+            >
               {item.label}
             </option>
           ))}
