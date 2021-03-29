@@ -10,7 +10,7 @@ import {
 import axios from "axios";
 import { useState, useRef } from "react";
 
-const ModalProductDeletion = (props) => {
+const ModalProductDeletion = ({ allProducts, displayMessage, productId }) => {
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
   const cancelRef = useRef();
@@ -21,14 +21,12 @@ const ModalProductDeletion = (props) => {
     } catch (error) {
       console.error(error);
     }
-    const deletedProductIndex = props.allProducts.findIndex(
-      (item) => item.id === id
-    );
+    const deletedProductIndex = allProducts.findIndex((item) => item.id === id);
 
-    const deletedProduct = props.allProducts[deletedProductIndex];
-    props.allProducts.splice(deletedProductIndex, 1);
+    const deletedProduct = allProducts[deletedProductIndex];
+    allProducts.splice(deletedProductIndex, 1);
     onClose();
-    props.displayMessage(`${deletedProduct.productName} is deleted`);
+    displayMessage(`${deletedProduct.productName} is deleted`);
   };
 
   return (
@@ -66,7 +64,7 @@ const ModalProductDeletion = (props) => {
               </Button>
               <Button
                 colorScheme="red"
-                onClick={() => deleteProductHandler(props.productId)}
+                onClick={() => deleteProductHandler(productId)}
                 ml={3}
               >
                 Delete
