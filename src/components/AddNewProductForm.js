@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 
-function NewProductForm(props) {
+function NewProductForm({ show, allProducts, displayMessage, setAllProducts }) {
   const [newProduct, setNewProduct] = useState({
     productName: "",
     price: "",
@@ -21,11 +21,11 @@ function NewProductForm(props) {
     quantity: "",
   });
 
-  if (!props.show) {
+  if (!show) {
     return null;
   }
 
-  const hasProductNameExisted = props.allProducts.find(
+  const hasProductNameExisted = allProducts.find(
     (item) => item.productName === newProduct.productName
   );
 
@@ -33,7 +33,7 @@ function NewProductForm(props) {
     event.preventDefault();
 
     if (hasProductNameExisted) {
-      props.displayMessage("Product name is already existed");
+      displayMessage("Product name is already existed");
 
       return;
     }
@@ -51,11 +51,9 @@ function NewProductForm(props) {
     try {
       await axios.post("http://localhost:3001/products", productAdded);
 
-      props.setAllProducts(props.allProducts.concat(productAdded));
+      setAllProducts(allProducts.concat(productAdded));
 
-      props.displayMessage(
-        `Product ${newProduct.productName} is added successfully`
-      );
+      displayMessage(`Product ${newProduct.productName} is added successfully`);
 
       setNewProduct({
         productName: "",
@@ -66,7 +64,7 @@ function NewProductForm(props) {
         quantity: "",
       });
     } catch (error) {
-      props.displayMessage(error.message);
+      displayMessage(error.message);
       console.error(error);
     }
   };

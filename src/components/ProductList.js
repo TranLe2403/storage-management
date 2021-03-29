@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
-import { Box, Grid, Image, Text, Stack, Button } from "@chakra-ui/react";
+import { Box, Grid, Image, Text, Stack } from "@chakra-ui/react";
+
 import ModalProductDeletion from "./ModalProductDeletion";
 import defaultImg from "../images/default.png";
+import ModalProductEdition from "./ModalProductEdition";
 
-function ProductList(props) {
+function ProductList({ show, allProducts, setAllProducts, displayMessage }) {
   const getNumberOfItems = () => {
     const screenSize = window.innerWidth;
 
@@ -28,7 +30,7 @@ function ProductList(props) {
     setLimitLength(getNumberOfItems());
   }
 
-  if (!props.show) {
+  if (!show) {
     return null;
   }
 
@@ -40,7 +42,7 @@ function ProductList(props) {
       mr={10}
       data-testid="test-all-products"
     >
-      {props.allProducts.map((item, index) => (
+      {allProducts.map((item, index) => (
         <Box
           key={item.id}
           bg="tomato"
@@ -77,20 +79,17 @@ function ProductList(props) {
           <p>Brand: {item.brand}</p>
           <p>Category: {item.category}</p>
           <Stack direction="row" spacing={4} align="center" mt={4}>
-            <Button
-              colorScheme="teal"
-              variant="solid"
-              width="50%"
-              height="30px"
-              borderRadius="full"
-            >
-              Edit
-            </Button>
+            <ModalProductEdition
+              productDetail={item}
+              allProducts={allProducts}
+              displayMessage={displayMessage}
+              setAllProducts={setAllProducts}
+            />
 
             <ModalProductDeletion
               productId={item.id}
-              allProducts={props.allProducts}
-              displayMessage={props.displayMessage}
+              allProducts={allProducts}
+              displayMessage={displayMessage}
             />
           </Stack>
         </Box>
